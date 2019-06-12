@@ -21,7 +21,7 @@ public class DataTableModel extends AbstractTableModel{
 		List<String> stringArr = new ArrayList<String>();
 		stringArr.add(variable.getName());
 		List<String> methodNames = variable.getMethods().stream().map(x -> x.getName()).collect(Collectors.toList());
-		stringArr.add(String.join("\n", methodNames));
+		stringArr.add(String.join(", ", methodNames));
 		tableData.add(stringArr);
 	}
 	

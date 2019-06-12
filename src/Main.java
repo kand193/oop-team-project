@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,8 +36,9 @@ public class Main extends JFrame {
 		JPanel Panel_C_Table = new JPanel();
 		JPanel Panel_D_Table = new JPanel();
 		
-		display_code = new JTextArea(60, 30);
+		display_code = new JTextArea(25, 20);
 		display_use = new JTextArea(10, 5);
+		display_use.setEditable(false);
 		
 		Panel_Use.setBorder(new TitledBorder("<Use>"));
 		Panel_Code.add(display_code);
@@ -48,8 +50,6 @@ public class Main extends JFrame {
 		
 		c_table = new JTable(c_table_model); //1)추가
 		d_table = new JTable(); //1)추가
-		Panel_C_Table.add(c_table);
-		Panel_D_Table.add(d_table);
 		
 		ClassTreeModel tree_model = new ClassTreeModel(classInfo);
 		
@@ -74,6 +74,7 @@ public class Main extends JFrame {
 				else if(o instanceof ClassVariable) {
 					DataTableModel d_table_model = new DataTableModel((ClassVariable)o);
 					d_table.setModel(d_table_model);
+					d_table.getColumnModel().getColumn(1).setPreferredWidth(230);
 					Panel_D_Table.setVisible(true);
 					Panel_C_Table.setVisible(false);
 					Panel_Code.setVisible(false);
@@ -93,12 +94,14 @@ public class Main extends JFrame {
 		getContentPane().add(Panel_Tree);
 		Panel_Tree.setVisible(true);
 		
-
-
 		Panel_C_Table.setBounds(215, 20, 300, 450);
+		Panel_C_Table.add(c_table.getTableHeader());
+		Panel_C_Table.add(c_table);
 		getContentPane().add(Panel_C_Table);
 		
 		Panel_D_Table.setBounds(215, 20, 300, 450);
+		Panel_D_Table.add(d_table.getTableHeader());
+		Panel_D_Table.add(d_table);
 		getContentPane().add(Panel_D_Table);
 		
 		Panel_Tree.add(tree);
